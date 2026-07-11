@@ -28,4 +28,18 @@ public class Student extends Person {
                 ", age=" + getAge() +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+
+        Student other = (Student) o;
+        return this.studentId == other.studentId;
+    }
+
+    @Override
+    public int hashCode() {
+        return studentId;
+    }
 }

@@ -78,4 +78,18 @@ public class Course {
                 ", courseLevel=" + courseLevel +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+
+        Course other = (Course) o;
+        return this.courseId == other.courseId;
+    }
+
+    @Override
+    public int hashCode() {
+        return courseId;
+    }
 }

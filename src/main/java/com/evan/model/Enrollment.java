@@ -32,5 +32,20 @@ public class Enrollment {
                 ", course=" + course +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Enrollment)) return false;
+
+        Enrollment other = (Enrollment) o;
+        return this.student.getStudentId() == other.student.getStudentId()
+                && this.course.getCourseId() == other.course.getCourseId();
+    }
+
+    @Override
+    public int hashCode() {
+        return student.getStudentId() + course.getCourseId();
+    }
 }
 
