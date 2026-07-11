@@ -1,6 +1,8 @@
 package com.evan.service;
 
 import com.evan.exception.CourseFullException;
+import com.evan.exception.CourseNotFoundException;
+import com.evan.exception.DuplicateEnrollmentException;
 import com.evan.exception.StudentNotFoundException;
 import com.evan.model.Course;
 import com.evan.model.Enrollment;
@@ -21,18 +23,30 @@ public class EnrollmentService {
         this.courseRepository=courseRepository;
     }
 
-    public void enrollStudent(Student student,Course course)throws StudentNotFoundException,CourseFullException{
+    public void enrollStudent(Student student,Course course)throws StudentNotFoundException,CourseNotFoundException,CourseFullException,DuplicateEnrollmentException{
 
-        boolean found=false;
+        boolean studentFound=false;
 
         for(Student s:studentRepository.getAll()){
             if(s.getStudentId()==student.getStudentId()){
-                found=true;
+                studentFound=true;
             }
         }
 
-        if(!found){
+        if(!studentFound){
             throw new StudentNotFoundException("Student not found");
+        }
+
+        boolean courseFound=false;
+
+        for(Course c:courseRepository.getAll()){
+            if(c.getCourseId()==course.getCourseId()){
+                courseFound=true;
+            }
+        }
+
+        if(!courseFound){
+            throw new CourseNotFoundException("Course not found");
         }
 
         int count=0;
@@ -41,8 +55,7 @@ public class EnrollmentService {
 
             if(e.getStudent().getStudentId()==student.getStudentId()&&
                     e.getCourse().getCourseId()==course.getCourseId()){
-                System.out.println("Student already enrolled");
-                return;
+                throw new DuplicateEnrollmentException("Student already enrolled in this course");
             }
 
             if(e.getCourse().getCourseId()==course.getCourseId()){
