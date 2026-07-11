@@ -7,11 +7,16 @@ public class Course {
     private String instructor;
     private int maxCapacity;
 
-    public Course(int courseId, String courseName, String instructor, int maxCapacity){
+    private Department department;
+    private CourseLevel courseLevel;
+
+    public Course(int courseId, String courseName, String instructor, int maxCapacity, Department department, CourseLevel courseLevel) {
         this.courseId=courseId;
         this.courseName=courseName;
         this.instructor=instructor;
         this.maxCapacity=maxCapacity;
+        this.department=department;
+        this.courseLevel=courseLevel;
     }
 
     public void setCourseId(int courseId){
@@ -46,6 +51,22 @@ public class Course {
     }
 
 
+    public void setDepartment(Department department){
+        this.department=department;
+    }
+    public Department getDepartment(){
+        return this.department;
+    }
+
+
+    public void setCourseLevel(CourseLevel courseLevel){
+        this.courseLevel=courseLevel;
+    }
+    public CourseLevel getCourseLevel(){
+        return this.courseLevel;
+    }
+
+
     @Override
     public String toString() {
         return "Course{" +
@@ -53,6 +74,8 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", instructor='" + instructor + '\'' +
                 ", maxCapacity=" + maxCapacity +
+                ", department=" + department +
+                ", courseLevel=" + courseLevel +
                 '}';
     }
 }
