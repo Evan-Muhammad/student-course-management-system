@@ -14,10 +14,19 @@ public class CourseService {
     }
 
     public void viewCourse(){
-        courseRepository.getAll();
+        System.out.println(courseRepository.getAll());
     }
 
     public Course searchCourse(int courseId){
+
+        for(Course course:courseRepository.getAll()){
+
+            if(course.getCourseId()==courseId){
+                return course;
+            }
+
+        }
+
         return null;
     }
 
